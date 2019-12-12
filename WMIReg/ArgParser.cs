@@ -47,16 +47,6 @@ namespace WMIReg
                 Environment.Exit(1);
             }
 
-            if (programArgs["action"] == "query")
-            {
-                if (!programArgs.ContainsKey("valuename"))
-                {
-                    Console.WriteLine("[!] Error! Valuename argument required when query a value. Use enum action if you just want list of keys");
-                    Helpers.Usage();
-                    Environment.Exit(1);
-                }
-            }
-
             if (programArgs["action"] != null)
             {
                 Action = programArgs["action"];

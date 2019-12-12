@@ -95,65 +95,82 @@ Example:
         {
             try
             {
-                if (CheckAccess.Check(Username, Password, Domain, ComputerName, Hive, Subkey, Access))
+                if (Valuename == null)
                 {
-                    object Valuetype = null;
-
-                    int val = EnumValues.GetValue(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
-
-                    switch (val)
+                    if (CheckAccess.Check(Username, Password, Domain, ComputerName, Hive, Subkey, Access))
                     {
-                        case (1):
-                            Valuetype = ValueType.String;
-                            break;
-                        case (2):
-                            Valuetype = ValueType.ExtendedString;
-                            break;
-                        case (3):
-                            Valuetype = ValueType.Binary;
-                            break;
-                        case (4):
-                            Valuetype = ValueType.DWORD;
-                            break;
-                        case (7):
-                            Valuetype = ValueType.MultiString;
-                            break;
-                        case (11):
-                            Valuetype = ValueType.QWORD;
-                            break;
+                        StdRegProv.EnumValues.Get(Username, Password, Domain, ComputerName, Hive, Subkey);
                     }
 
-                    switch (Valuetype)
+                    else
                     {
-                        case (ValueType.String):
-                            StdRegProv.String.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
-                            break;
-                        case (ValueType.ExtendedString):
-                            ExString.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
-                            break;
-                        case (ValueType.Binary):
-                            Binary.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
-                            break;
-                        case (ValueType.DWORD):
-                            Dword.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
-                            break;
-                        case (ValueType.MultiString):
-                            MultiString.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
-                            break;
-                        case (ValueType.QWORD):
-                            Qword.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
-                            break;
-                        default:
-                            Console.WriteLine($"[-] Error: Do not have permissions to query {Subkey}");
-                            Environment.Exit(1);
-                            break;
+                        Console.WriteLine($"[-] Error: Do not have permissions to query {Subkey}");
+                        Environment.Exit(1);
                     }
                 }
 
                 else
                 {
-                    Console.WriteLine($"[-] Error: Do not have permissions to query {Subkey}");
-                    Environment.Exit(1);
+                    if (CheckAccess.Check(Username, Password, Domain, ComputerName, Hive, Subkey, Access))
+                    {
+                        object Valuetype = null;
+
+                        int val = EnumValues.GetValue(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
+
+                        switch (val)
+                        {
+                            case (1):
+                                Valuetype = ValueType.String;
+                                break;
+                            case (2):
+                                Valuetype = ValueType.ExtendedString;
+                                break;
+                            case (3):
+                                Valuetype = ValueType.Binary;
+                                break;
+                            case (4):
+                                Valuetype = ValueType.DWORD;
+                                break;
+                            case (7):
+                                Valuetype = ValueType.MultiString;
+                                break;
+                            case (11):
+                                Valuetype = ValueType.QWORD;
+                                break;
+                        }
+
+                        switch (Valuetype)
+                        {
+                            case (ValueType.String):
+                                StdRegProv.String.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
+                                break;
+                            case (ValueType.ExtendedString):
+                                ExString.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
+                                break;
+                            case (ValueType.Binary):
+                                Binary.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
+                                break;
+                            case (ValueType.DWORD):
+                                Dword.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
+                                break;
+                            case (ValueType.MultiString):
+                                MultiString.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
+                                break;
+                            case (ValueType.QWORD):
+                                Qword.Get(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
+                                break;
+                            default:
+                                Console.WriteLine($"[-] Error: Do not have permissions to query {Subkey}");
+                                Environment.Exit(1);
+                                break;
+                        }
+                    }
+
+                    else
+                    {
+                        Console.WriteLine($"[-] Error: Do not have permissions to query {Subkey}");
+                        Environment.Exit(1);
+                    }
                 }
             }
 

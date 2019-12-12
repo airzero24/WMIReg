@@ -41,7 +41,7 @@ namespace WMIReg.StdRegProv
                 inParams["sValueName"] = ValueName;
                 ManagementBaseObject outParams = registry.InvokeMethod("GetBinaryValue", inParams, null);
                 Console.WriteLine($"[+] Successfully retrieved {ValueName} value for key {SubKey}\n");
-                Console.WriteLine((string)outParams["uValue"]);
+                Console.WriteLine(Convert.ToBase64String((byte[])outParams["uValue"]));
             }
             catch (Exception e)
             {

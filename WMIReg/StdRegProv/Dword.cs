@@ -41,7 +41,7 @@ namespace WMIReg.StdRegProv
                 inParams["sValueName"] = ValueName;
                 ManagementBaseObject outParams = registry.InvokeMethod("GetDWORDValue", inParams, null);
                 Console.WriteLine($"[+] Successfully retrieved {ValueName} value for key {SubKey}\n");
-                Console.WriteLine((string)outParams["uValue"]);
+                Console.WriteLine((UInt32)outParams["uValue"]);
             }
             catch (Exception e)
             {
