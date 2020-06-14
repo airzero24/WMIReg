@@ -180,7 +180,7 @@ Example:
             }
         }
 
-        public static void Write(string Username, string Password, string Domain, string ComputerName, object Hive, string Subkey, string Valuename, string Value, object Access)
+        public static void Write(string Username, string Password, string Domain, string ComputerName, object Hive, string Subkey, string Valuename, string Value, string Type,object Access)
         {
             try
             {
@@ -188,28 +188,54 @@ Example:
                 {
                     object Valuetype = null;
 
-                    int val = EnumValues.GetValue(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
-
-                    switch (val)
+                    if (Type != null)
                     {
-                        case (1):
-                            Valuetype = ValueType.String;
-                            break;
-                        case (2):
-                            Valuetype = ValueType.ExtendedString;
-                            break;
-                        case (3):
-                            Valuetype = ValueType.Binary;
-                            break;
-                        case (4):
-                            Valuetype = ValueType.DWORD;
-                            break;
-                        case (7):
-                            Valuetype = ValueType.MultiString;
-                            break;
-                        case (11):
-                            Valuetype = ValueType.QWORD;
-                            break;
+                        switch (Type.ToLower())
+                        {
+                            case ("string"):
+                                Valuetype = ValueType.String;
+                                break;
+                            case ("exstring"):
+                                Valuetype = ValueType.ExtendedString;
+                                break;
+                            case ("binary"):
+                                Valuetype = ValueType.Binary;
+                                break;
+                            case ("dword"):
+                                Valuetype = ValueType.DWORD;
+                                break;
+                            case ("multistring"):
+                                Valuetype = ValueType.MultiString;
+                                break;
+                            case ("qword"):
+                                Valuetype = ValueType.QWORD;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        int val = EnumValues.GetValue(Username, Password, Domain, ComputerName, Hive, Subkey, Valuename);
+                        switch (val)
+                        {
+                            case (1):
+                                Valuetype = ValueType.String;
+                                break;
+                            case (2):
+                                Valuetype = ValueType.ExtendedString;
+                                break;
+                            case (3):
+                                Valuetype = ValueType.Binary;
+                                break;
+                            case (4):
+                                Valuetype = ValueType.DWORD;
+                                break;
+                            case (7):
+                                Valuetype = ValueType.MultiString;
+                                break;
+                            case (11):
+                                Valuetype = ValueType.QWORD;
+                                break;
+                        }
                     }
 
                     switch (Valuetype)

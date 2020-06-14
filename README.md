@@ -74,6 +74,45 @@ Example:
 ```
 
 >Note: When setting the value for a subkey as `Binary` data, pass as a base64 string to `value`. This will be converted but he .Net assembly.
+>Note: An `Index was outside the bounds of the array.` error typically means a key/value does not exist.
+
+## Example Usage
+Here is an example of setting and disabling Resitricted Admin Mode on a remote host.
+
+Querying the value on remote system
+```
+WMIReg.exe action=query computername=DC.theshire.local subkey=SYSTEM\CurrentControlSet\Control\Lsa valuename=DisableRestrictedAdmin
+[+] Successfully checked permissions for key SYSTEM\CurrentControlSet\Control\Lsa
+[+] User has access permissions for key SYSTEM\CurrentControlSet\Control\Lsa
+[+] Successfully retrieved DisableRestrictedAdmin value for key SYSTEM\CurrentControlSet\Control\Lsa
+
+0
+```
+
+Querying DisableRestrictedAdmin when value is cleared
+```
+WMIReg.exe action=query computername=DC.theshire.local subkey=SYSTEM\CurrentControlSet\Control\Lsa valuename=DisableRestrictedAdmin
+[+] Successfully checked permissions for key SYSTEM\CurrentControlSet\Control\Lsa
+[+] User has access permissions for key SYSTEM\CurrentControlSet\Control\Lsa
+[-] Error: Index was outside the bounds of the array.
+[-] Error: Do not have permissions to query SYSTEM\CurrentControlSet\Control\Lsa
+```
+
+Setting DisableRestrictedAdmin to enabled
+```
+WMIReg.exe action=set computername=DC.theshire.local subkey=SYSTEM\CurrentControlSet\Control\Lsa valuename=DisableRestrictedAdmin value=0 valuetype=dword
+[+] Successfully checked permissions for key SYSTEM\CurrentControlSet\Control\Lsa
+[+] User has access permissions for key SYSTEM\CurrentControlSet\Control\Lsa
+[+] Successfully set DisableRestricted
+```
+
+Setting DisableRestrictedAdmin to disabled
+```
+WMIReg.exe action=set computername=DC.theshire.local subkey=SYSTEM\CurrentControlSet\Control\Lsa valuename=DisableRestrictedAdmin value=1 valuetype=dword
+[+] Successfully checked permissions for key SYSTEM\CurrentControlSet\Control\Lsa
+[+] User has access permissions for key SYSTEM\CurrentControlSet\Control\Lsa
+[+] Successfully set DisableRestricted
+```
 
 ## Resources
 - [Microsoft](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/regprov/stdregprov)

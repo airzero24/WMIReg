@@ -17,7 +17,7 @@ namespace WMIReg
                         Helpers.Query(ArgParser.Username, ArgParser.Password, ArgParser.Domain, ArgParser.ComputerName, ArgParser.Hive, ArgParser.Subkey, ArgParser.Valuename, ArgParser.Value, Helpers.AccessPermission.KEY_QUERY_VALUE);
                         break;
                     case ("set"):
-                        Helpers.Write(ArgParser.Username, ArgParser.Password, ArgParser.Domain, ArgParser.ComputerName, ArgParser.Hive, ArgParser.Subkey, ArgParser.Valuename, ArgParser.Value, Helpers.AccessPermission.KEY_SET_VALUE);
+                        Helpers.Write(ArgParser.Username, ArgParser.Password, ArgParser.Domain, ArgParser.ComputerName, ArgParser.Hive, ArgParser.Subkey, ArgParser.Valuename, ArgParser.Value, ArgParser.Type, Helpers.AccessPermission.KEY_SET_VALUE);
                         break;
                     case ("create"):
                         Helpers.Create(ArgParser.Username, ArgParser.Password, ArgParser.Domain, ArgParser.ComputerName, ArgParser.Hive, ArgParser.Subkey, Helpers.AccessPermission.KEY_CREATE);

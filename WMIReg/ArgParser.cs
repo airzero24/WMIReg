@@ -30,6 +30,7 @@ namespace WMIReg
         public static string Subkey = null;
         public static string Valuename = null;
         public static string Value = null;
+        public static string Type = null;
 
         public static void ValidateArgs(Dictionary<string, string> programArgs)
         {
@@ -117,11 +118,21 @@ namespace WMIReg
                 Value = programArgs["value"];
             }
 
+            if (!programArgs.ContainsKey("valuetype"))
+            {
+                Type = null;
+            }
+
+            else
+            {
+                Type = programArgs["valuetype"];
+            }
+
             if (!programArgs.ContainsKey("hive"))
             {
                 Hive = Helpers.Hive.HKEY_LOCAL_MACHINE;
             }
-            
+
             else
             {
                 switch (programArgs["hive"].ToLower())
