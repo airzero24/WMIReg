@@ -74,6 +74,7 @@ Example:
 ```
 
 >Note: When setting the value for a subkey as `Binary` data, pass as a base64 string to `value`. This will be converted but he .Net assembly.
+
 >Note: An `Index was outside the bounds of the array.` error typically means a key/value does not exist.
 
 ## Example Usage
